@@ -8,7 +8,7 @@ from nltk.tokenize import word_tokenize
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
-import joblibpip
+import joblib
 from sqlalchemy import create_engine
 
 
@@ -39,6 +39,14 @@ model = joblib.load("../models/drp_classifier.pkl")
 def index():
     
     # extract data needed for visuals
+    
+    # Categories Visual
+    df_cat = df.drop(labels = ['id', 'message', 'original', 'genre'], axis=1)
+    # Sum up all values of each column in the df_cat
+    category_counts = df_cat.sum()
+    category_names = df_cat.columns
+
+    # Genre Visual
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
@@ -49,23 +57,42 @@ def index():
         {
             'data': [
                 Bar(
-                    x=genre_names,
-                    y=genre_counts
+                    x=category_names,
+                    y=category_counts
                 )
             ],
 
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Training Data: Distribution of Message Categories (Labels, Multiple Assignements Possible)',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': "Category"
                 }
             }
-        }
+        },
+        {
+                'data': [
+                    Bar(
+                        x=genre_names,
+                        y=genre_counts
+                    )
+                ],
+
+                'layout': {
+                    'title': 'Training Data: Distribution of Message Genres',
+                    'yaxis': {
+                        'title': "Count"
+                    },
+                    'xaxis': {
+                        'title': "Genre"
+                    }
+                }
+            }
     ]
-    
+
+
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
