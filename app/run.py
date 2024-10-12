@@ -26,11 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/drp.db')
+engine = create_engine('sqlite:///./data/drp.db')
 df = pd.read_sql_table('msgcat', engine)
 
 # load model
-model = joblib.load("../models/drp_classifier.pkl")
+model = joblib.load("./models/drp_classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
