@@ -32,16 +32,16 @@ The data is made up of two files:
 * process_data.py - Extraction, transformation, and load of CSV above files into SQLITE DB including data cleansing.
 * train_classifier.py - Definition and training of a supervised machine learning model based on labeled message data.
 * run.py - Web application with user interface to classify new messages 
-## Execution <a name="files"></a>
+
+## Execution <a name="execution"></a>
 
 Start all commands from in DisasterResponse main directory (cd DisasterResponse)
 
-**(1) ETL**`
+**(1) ETL**
 
 Start of execution using command line with for mandatory arguments:
 
 `python process_data.py [messages_filepath] [categories_filepath] [database_filepath]`
-
 `python "./data/process_data.py" "./data/messages.csv" "./data/categories.csv" "sqlite:///./data/drp.db"`
 
 Provide the filepaths of the messages and categories datasets as the first and second argument respectively, as well as the filepath of the database to save the cleaned data to as the third argument. 
@@ -49,6 +49,7 @@ Provide the filepaths of the messages and categories datasets as the first and s
 Example: python process_data.py disaster_messages.csv disaster_categories.csv DisasterResponse.db
 
 **(2) Model definition and training**
+
 Start of execution using command line with two mandatory arguments:
 
 `python train_classifier.py [database_filepath] [model_filepath]`
@@ -59,9 +60,5 @@ Provide the filepath of the disaster messages database as the first argument and
 Example: python train_classifier.py ../data/DisasterResponse.db classifier.pkl
 
 **(3) Web Front End**
-
-a. In Udacity Project Workspace go to `app` directory: `cd app`
-
-b. Run your web app: `python "./app/run.py"`
-
-c. Click the `PREVIEW` button to open the homepage
+a. Run web app: `python "./app/run.py"`
+b. Open URL http://127.0.0.1:3000

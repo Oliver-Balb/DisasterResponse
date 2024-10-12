@@ -11,7 +11,6 @@ from plotly.graph_objs import Bar
 import joblib
 from sqlalchemy import create_engine
 
-
 app = Flask(__name__)
 
 def tokenize(text):
@@ -120,6 +119,9 @@ def go():
 
 
 def main():
+
+
+
     app.run(host='0.0.0.0', port=3000, debug=True)
 
 
