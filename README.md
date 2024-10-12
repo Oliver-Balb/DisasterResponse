@@ -29,9 +29,9 @@ The data is made up of two files:
 * catagories.csv - labels in 38 categories related to messages.csv
 
 ### Program Files
-* process_data.py - Extraction, transformation, and load of CSV above files into SQLITE DB including data cleansing.
-* train_classifier.py - Definition and training of a supervised machine learning model based on labeled message data.
-* run.py - Web application with user interface to classify new messages 
+* process_data.py - Extraction, transformation, and load of CSV above files into SQLITE DB (*.db) including data cleansing. 
+* train_classifier.py - Definition and training of a supervised machine learning model based on labeled message data in SQLITE DB. Generates PICKLE (*.pkl) file containing the training model for use in web app.
+* run.py - Web application with user interface to classify new messages based on user entry and model stored in PICKLE file. 
 
 ## Execution <a name="execution"></a>
 
@@ -42,6 +42,7 @@ Start all commands from in DisasterResponse main directory (cd DisasterResponse)
 Start of execution using command line with for mandatory arguments:
 
 `python process_data.py [messages_filepath] [categories_filepath] [database_filepath]`
+
 `python "./data/process_data.py" "./data/messages.csv" "./data/categories.csv" "sqlite:///./data/drp.db"`
 
 Provide the filepaths of the messages and categories datasets as the first and second argument respectively, as well as the filepath of the database to save the cleaned data to as the third argument. 
@@ -53,6 +54,7 @@ Example: python process_data.py disaster_messages.csv disaster_categories.csv Di
 Start of execution using command line with two mandatory arguments:
 
 `python train_classifier.py [database_filepath] [model_filepath]`
+
 `python "./models/train_classifier.py" "sqlite:///./data/drp.db" "./models/drp_classifier.pkl"`
 
 Provide the filepath of the disaster messages database as the first argument and the filepath of the pickle  file to save the model to as the second argument. 
